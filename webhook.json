@@ -1,0 +1,6 @@
+{
+    "webhook_url": "https://discord.com/api/webhooks/...",
+    "webhook_type": "discord",
+    "message_prefix": "Discord Logger",
+    "log_level": "info"
+  }
