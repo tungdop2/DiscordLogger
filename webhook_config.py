@@ -12,9 +12,23 @@ def check_discord_webhook_config(config: dict) -> bool:
 
 
 class WebhookConfig:
-    def __init__(self, config_path: str):
-        self.config_path = config_path
-        self.values = self.load_config()
+    def __init__(
+            self, 
+            config_path: str,
+            webhook_url: str = None,
+            webhook_type: str = "discord",
+            message_prefix: str = None,
+            log_level: str = "info",
+        ):
+        if config_path:
+            self.values = self.load_config_from_file(config_path)
+        else:
+            self.values = {
+                "webhook_url": webhook_url,
+                "webhook_type": webhook_type,
+                "message_prefix": message_prefix,
+                "log_level": log_level,
+            }
         if (
             "webhook_type" not in self.values
             or self.values["webhook_type"] not in supported_webhooks
@@ -24,8 +38,8 @@ class WebhookConfig:
             )
         check_discord_webhook_config(self.values)
 
-    def load_config(self):
-        with open(self.config_path, "r") as f:
+    def load_config_from_file(self, config_path: str = None):
+        with open(config_path, "r") as f:
             return load(f)
 
     def get_config(self):

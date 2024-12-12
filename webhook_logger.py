@@ -12,23 +12,19 @@ logger.setLevel("INFO")
 class WebhookLogger:
     def __init__(
         self,
-        config_path: str = "webhook.json",
+        config_path: str = None,
         webhook_url: str = None,
-        webhook_type: str = None,
+        webhook_type: str = "discord",
         message_prefix: str = None,
         log_level: str = None,
     ):
-        self.config = WebhookConfig(config_path)
-        
-        # Overwrite config values if provided
-        if webhook_url:
-            self.config.webhook_url = webhook_url
-        if webhook_type:
-            self.config.webhook_type = webhook_type
-        if message_prefix:
-            self.config.message_prefix = message_prefix
-        if log_level:
-            self.config.log_level = log_level
+        self.config = WebhookConfig(
+            config_path=config_path,
+            webhook_url=webhook_url,
+            webhook_type=webhook_type,
+            message_prefix=message_prefix,
+            log_level=log_level,
+        )
             
         self.webhook_url = self.config.webhook_url
         self.message_prefix = (
@@ -102,7 +98,7 @@ class WebhookLogger:
 if __name__ == "__main__":
     # Example usage of the WebhookHandler class
     handler = WebhookLogger(
-        config_path="webhook.json"
+        config_path="./webhook.json"
     )
     
     # Send a test message

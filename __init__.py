@@ -1,1 +1,1 @@
-from webhook_logger import WebhookLogger
+from .webhook_logger import WebhookLogger
