@@ -1,4 +1,4 @@
-from webhook_config import WebhookConfig
+from .webhook_config import WebhookConfig
 import requests
 import logging
 from io import BytesIO
